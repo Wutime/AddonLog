@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<code_event_listeners>
+  <listener event_id="addon_post_install" execute_order="10" callback_class="Wutime\AddonLog\Listener" callback_method="postInstall" active="1" hint="XF\AddOn\AddOn"/>
+  <listener event_id="addon_post_rebuild" execute_order="10" callback_class="Wutime\AddonLog\Listener" callback_method="postRebuild" active="1" hint="admi"/>
+  <listener event_id="addon_post_uninstall" execute_order="10" callback_class="Wutime\AddonLog\Listener" callback_method="postUninstall" active="1"/>
+  <listener event_id="addon_post_upgrade" execute_order="10" callback_class="Wutime\AddonLog\Listener" callback_method="postUpgrade" active="1"/>
+</code_event_listeners>

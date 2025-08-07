@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<routes>
+  <route route_type="admin" route_prefix="wu-logs-addon" controller="Wutime\AddonLog\Admin\Controller\Log" action_prefix="index"/>
+</routes>
