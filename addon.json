@@ -1,14 +1,14 @@
 {
     "legacy_addon_id": "",
-    "title": "Addon Change Log",
+    "title": "[Wutime] Addon Change Log",
     "description": "",
     "version_id": 1000000,
     "version_string": "1.0.0",
     "dev": "Wutime",
     "dev_url": "https://woocommerce.wutime.com/",
     "faq_url": "",
-    "support_url": "",
+    "support_url": "https://xenforo.com/community/resources/addon-change-log.10020/",
     "extra_urls": [],
     "require": [],
-    "icon": "fa-search"
+    "icon": "addonlog.png"
 }
