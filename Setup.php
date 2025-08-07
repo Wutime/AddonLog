@@ -35,6 +35,6 @@ class Setup extends AbstractSetup
 
     public function uninstall(array $stepParams = [])
     {
-        $this->schemaManager()->dropTable('wu_addon_log');
+        $this->schemaManager()->dropTable('xf_wu_addon_log');
     }
 }
