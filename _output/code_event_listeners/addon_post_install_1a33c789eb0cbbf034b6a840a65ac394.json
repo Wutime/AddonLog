@@ -1,0 +1,9 @@
+{
+    "event_id": "addon_post_install",
+    "execute_order": 10,
+    "callback_class": "Wutime\\AddonLog\\Listener",
+    "callback_method": "postInstall",
+    "active": true,
+    "hint": "XF\\AddOn\\AddOn",
+    "description": ""
+}

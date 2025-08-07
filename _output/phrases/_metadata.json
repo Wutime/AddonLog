@@ -1,0 +1,14 @@
+{
+    "admin_navigation.addonLog.txt": {
+        "global_cache": false,
+        "version_id": 1000000,
+        "version_string": "1.0.0",
+        "hash": "cdee16ac1c44295062aa35ab6481d111"
+    },
+    "wutime_addonlog_logs.txt": {
+        "global_cache": false,
+        "version_id": 1000000,
+        "version_string": "1.0.0",
+        "hash": "956e6a6cd081267ad653b87c4c7afbb1"
+    }
+}

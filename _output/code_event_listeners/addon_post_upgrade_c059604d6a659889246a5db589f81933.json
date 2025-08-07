@@ -1,0 +1,9 @@
+{
+    "event_id": "addon_post_upgrade",
+    "execute_order": 10,
+    "callback_class": "Wutime\\AddonLog\\Listener",
+    "callback_method": "postUpgrade",
+    "active": true,
+    "hint": "",
+    "description": ""
+}

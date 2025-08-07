@@ -1,0 +1,11 @@
+{
+    "route_type": "admin",
+    "route_prefix": "wu-logs-addon",
+    "sub_name": "",
+    "format": "",
+    "build_class": "",
+    "build_method": "",
+    "controller": "Wutime\\AddonLog\\Admin\\Controller\\Log",
+    "context": "",
+    "action_prefix": "index"
+}
