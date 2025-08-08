@@ -52,7 +52,7 @@ class Listener
         self::log(
             $addOnId,
             $title,
-            'delete',
+            'uninstall',
             $version,
             '' // prior version unknown
         );
@@ -82,29 +82,31 @@ class Listener
         string $version = '',
         string $versionPrior = ''
     ) {
-
-    	$userId = \XF::visitor()->user_id;
-
-\XF::logError(sprintf(
-    "[AddonLog] Logging: %s, %s, %s, %s, %s, %s",
-    $addonId,
-    $title,
-    $type,
-    $version,
-    $versionPrior,
-    $userId
-));
+        $userId = \XF::visitor()->user_id ?: 0; // Removed CLI check
 
         /** @var \Wutime\AddonLog\Repository\Log $repo */
         $repo = \XF::app()->repository('Wutime\AddonLog:Log');
 
-        $repo->logAction(
-            $addonId,
-            $title,
-            $type,
-            \XF::visitor()->user_id ?: (PHP_SAPI === 'cli' ? 1 : 0),
-            $version,
-            $versionPrior
-        );
+        try {
+            $repo->logAction(
+                $addonId,
+                $title,
+                $type,
+                $userId,
+                $version,
+                $versionPrior
+            );
+        } catch (\Exception $e) {
+            \XF::logError(sprintf(
+                "[AddonLog] Failed to log action: %s, %s, %s, %s, %s, %s. Error: %s",
+                $addonId,
+                $title,
+                $type,
+                $version,
+                $versionPrior,
+                $userId,
+                $e->getMessage()
+            ));
+        }
     }
 }

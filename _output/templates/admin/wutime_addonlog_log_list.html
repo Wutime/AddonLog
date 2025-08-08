@@ -10,8 +10,8 @@
                 {{ phrase('install') }}
             <xf:elseif is="$log.type == 'upgrade'" />
                 {{ phrase('upgrade') }}
-            <xf:elseif is="$log.type == 'delete'" />
-                {{ phrase('delete') }}
+            <xf:elseif is="$log.type == 'uninstall'" /> 
+                {{ phrase('uninstall') }}
             <xf:elseif is="$log.type == 'enable'" />
                 {{ phrase('enable') }}
             <xf:elseif is="$log.type == 'disable'" />
