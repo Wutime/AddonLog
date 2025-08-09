@@ -6,6 +6,7 @@ use XF\AddOn\AbstractSetup;
 use XF\AddOn\StepRunnerInstallTrait;
 use XF\AddOn\StepRunnerUninstallTrait;
 use XF\AddOn\StepRunnerUpgradeTrait;
+use XF\Db\Schema\Create;
 use XF\Db\Schema\Alter;
 
 class Setup extends AbstractSetup
@@ -96,7 +97,11 @@ INSTALL
 
 
     public  function postInstall(array &$stateChanges) {
-    	\XF::app()->repository('XF:Permission')->rebuildGlobalPermissionCache();
+	    $this->app()->jobManager()->enqueueUnique(
+	        'permissionRebuild',
+	        'XF:PermissionRebuild',
+	        []
+	    );
     }
 
 
@@ -147,7 +152,11 @@ UPGRADE
 		    'viewAddonUpdates'
 		);
 
-		\XF::app()->repository('XF:Permission')->rebuildGlobalPermissionCache();
+	    $this->app()->jobManager()->enqueueUnique(
+	        'permissionRebuild',
+	        'XF:PermissionRebuild',
+	        []
+	    );
 	}
 
 
