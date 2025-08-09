@@ -27,7 +27,7 @@
             <div class="block-body">
                 <xf:datalist data-xf-init="responsive-data-list">
                     <xf:datarow rowtype="header">
-						<xf:cell>{{ phrase('icon') }}</xf:cell>
+						<xf:cell>{{ phrase('add_on') }}</xf:cell>
                         <xf:cell>{{ phrase('title') }}</xf:cell>
                         <xf:cell>{{ phrase('type') }}</xf:cell>
                         <xf:cell>{{ phrase('wual_new_version') }}</xf:cell>
@@ -50,9 +50,17 @@
                             <xf:cell>{$log.version_string}</xf:cell>
                             <xf:cell>{$log.version_string_prior}</xf:cell>
 							<xf:cell><xf:date time="{{ $log.log_date }}" /></xf:cell>
-                            <xf:cell>
-                                <xf:avatar user="{$log.User}" size="s" notooltip="true" />
-                            </xf:cell>
+							<xf:cell>
+								<div class="contentRow contentRow--alignMiddle">
+									<div class="contentRow-figure">
+										<xf:avatar user="{$log.User}" size="s" />
+									</div>
+									<div class="contentRow-main">
+										<xf:username user="{$log.User}" rich="true" />
+									</div>
+								</div>
+							</xf:cell>
+
                         </xf:datarow>
                     </xf:foreach>
                 </xf:datalist>

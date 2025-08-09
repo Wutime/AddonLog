@@ -5,13 +5,13 @@
         "hash": "57137cae2789ba3b094da0ce63b7f108"
     },
     "admin/wutime_addonlog_log_list.html": {
-        "version_id": 1000000,
-        "version_string": "1.0.0",
-        "hash": "a9c61b4f7a2322b2ae3ffe33ffe39090"
+        "version_id": 1010170,
+        "version_string": "1.1.1",
+        "hash": "b91f9d511445b1c5e1a388082243796a"
     },
     "public/wual_addon_updates.html": {
-        "version_id": 1000270,
-        "version_string": "1.0.2",
-        "hash": "11d0acbd5e19529f585e75f884c719df"
+        "version_id": 1010170,
+        "version_string": "1.1.1",
+        "hash": "45472a6a920210978dc279c743232440"
     }
 }

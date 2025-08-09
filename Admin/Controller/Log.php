@@ -9,12 +9,29 @@ class Log extends AbstractController
 {
     public function actionIndex()
     {
-        $logRepo = \XF::app()->repository('Wutime\AddonLog:Log');
+        $page = $this->filterPage(); // current page number from query string
+        $perPage = 20; // adjust if you want more/less per page
 
-        $logs = $logRepo->findLogsForList()->fetch();
+        /** @var \Wutime\AddonLog\Repository\Log $logRepo */
+        $logRepo = $this->repository('Wutime\AddonLog:Log');
 
-        return $this->view('Wutime\AddonLog:Log\List', 'wutime_addonlog_log_list', [
-            'logs' => $logs
-        ]);
+        $finder = $logRepo->findLogsForList();
+
+        $total = $finder->total();
+
+        $logs = $finder
+            ->limitByPage($page, $perPage)
+            ->fetch();
+
+        return $this->view(
+            'Wutime\AddonLog:Log\List',
+            'wutime_addonlog_log_list',
+            [
+                'logs' => $logs,
+                'page' => $page,
+                'perPage' => $perPage,
+                'total' => $total
+            ]
+        );
     }
 }

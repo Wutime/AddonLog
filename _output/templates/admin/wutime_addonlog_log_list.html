@@ -1,55 +1,57 @@
 <xf:title>{{ phrase('wutime_addonlog_logs') }}</xf:title>
 <xf:page option="wutime_addonlog_logs" />
 
-<xf:macro name="log_row" arg-log="!">
-    <tr class="dataList-row">
-        <td class="dataList-cell">{{ $log.addon_id }}</td>
-        <td class="dataList-cell">{{ $log.title }}</td>
-        <td class="dataList-cell">
-            <xf:if is="$log.type == 'install'">
-                {{ phrase('install') }}
-            <xf:elseif is="$log.type == 'upgrade'" />
-                {{ phrase('upgrade') }}
-            <xf:elseif is="$log.type == 'uninstall'" /> 
-                {{ phrase('uninstall') }}
-            <xf:elseif is="$log.type == 'enable'" />
-                {{ phrase('enable') }}
-            <xf:elseif is="$log.type == 'disable'" />
-                {{ phrase('disable') }}
-            <xf:else />
-                {{ $log.type }}
-            </xf:if>
-        </td>
-        <td class="dataList-cell"><xf:date time="{$log.log_date}" /></td>
-        <td class="dataList-cell">
-            <xf:if is="$log.User">
-                <a href="{{ link('users/edit', $log.User) }}">{{ $log.User.username }}</a>
-            <xf:else />
-                {{ phrase('guest') }}
-            </xf:if>
-        </td>
-    </tr>
-</xf:macro>
-
-<xf:css>
-.dataList-cell { padding: 5px 10px; }
-</xf:css>
-
 <div class="block">
-    <div class="block-container">
-        <div class="block-body">
-            <xf:datalist data-xf-init="responsive-data-list">
-                <tr class="dataList-row dataList-row--header">
-                    <th class="dataList-cell">Add-on ID</th>
-                    <th class="dataList-cell">Title</th>
-                    <th class="dataList-cell">Type</th>
-                    <th class="dataList-cell">Date</th>
-                    <th class="dataList-cell">User</th>
-                </tr>
-                <xf:foreach loop="$logs" value="$log">
-                    <xf:macro name="log_row" arg-log="{$log}" />
-                </xf:foreach>
-            </xf:datalist>
-        </div>
-    </div>
+	
+	<xf:pagenav
+		page="{$page}"
+		perpage="{$perPage}"
+		total="{$total}"
+		link="wu-logs-addon" />
+	
+	<div class="block-container">
+		<div class="block-body">
+			<xf:datalist data-xf-init="responsive-data-list">
+				<xf:datarow rowtype="header">
+					<xf:cell>{{ phrase('add_on') }}</xf:cell>
+					<xf:cell>{{ phrase('title') }}</xf:cell>
+					<xf:cell>{{ phrase('type') }}</xf:cell>
+					<xf:cell>{{ phrase('wual_new_version') }}</xf:cell>
+					<xf:cell>{{ phrase('wual_previous_version') }}</xf:cell>
+					<xf:cell>{{ phrase('date') }}</xf:cell>
+					<xf:cell>{{ phrase('user') }}</xf:cell>
+				</xf:datarow>
+
+				<xf:foreach loop="$logs" value="$log">
+					<xf:datarow>
+						<xf:cell>{$log.addon_id}</xf:cell>
+						<xf:cell>{$log.title}</xf:cell>
+						<xf:cell>
+							<xf:if is="$log.type == 'install'">{{ phrase('install') }}
+							<xf:elseif is="$log.type == 'upgrade'" />{{ phrase('upgrade') }}
+							<xf:elseif is="$log.type == 'uninstall'" />{{ phrase('uninstall') }}
+							<xf:elseif is="$log.type == 'enable'" />{{ phrase('enable') }}
+							<xf:elseif is="$log.type == 'disable'" />{{ phrase('disable') }}
+							<xf:else />{$log.type}</xf:if>
+						</xf:cell>
+						<xf:cell>{$log.version_string}</xf:cell>
+						<xf:cell>{$log.version_string_prior}</xf:cell>
+						<xf:cell><xf:date time="{$log.log_date}" /></xf:cell>
+						<xf:cell>
+							<xf:if is="$log.User">
+								<a href="{{ link('users/edit', $log.User) }}">{$log.User.username}</a>
+							</xf:if>
+						</xf:cell>
+					</xf:datarow>
+				</xf:foreach>
+			</xf:datalist>
+
+		</div>
+	</div>
+	
+	<xf:pagenav
+		page="{$page}"
+		perpage="{$perPage}"
+		total="{$total}"
+		link="wu-logs-addon" />
 </div>

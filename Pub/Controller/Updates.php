@@ -11,7 +11,9 @@ class Updates extends AbstractController
     {
 
 
-    	$this->assertPermission('viewAddonUpdates');
+	    if (!\XF::visitor()->hasPermission('general', 'viewAddonUpdates')) {
+	        return $this->noPermission();
+	    }
     	
     	$opt = \XF::options();
         $page = max(1, $this->filterPage());
