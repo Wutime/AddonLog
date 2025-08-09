@@ -1,0 +1,60 @@
+<xf:radiorow name="{$inputName}[action]" value="{{ $option.option_value.action|default('none') }}"
+    label="{$option.title}" hint="{$hintHtml}" explain="{$explainHtml}"
+    html="{$listedHtml}" rowclass="{$rowClass}">
+
+    <xf:option value="none" label="{{ phrase('silence_is_golden') }}" />
+
+    <xf:option value="thread" label="{{ phrase('wual_post_addon_update_to_forum') }}">
+        <xf:dependent>
+            <xf:select name="{$inputName}[node_id]" value="{{ $option.option_value.node_id|default(0) }}">
+                <xf:option value="0">&nbsp;</xf:option>
+                <xf:foreach loop="$nodeTree.getFlattened()" value="$treeEntry">
+                    <xf:option value="{$treeEntry.record.node_id}" disabled="{{ $treeEntry.record.node_type_id != 'Forum' }}">
+                        {{ repeat('--', $treeEntry.depth) }} {$treeEntry.record.title}
+                    </xf:option>
+                </xf:foreach>
+                <xf:options source="$formatParams" />
+            </xf:select>
+
+            <div class="block block-row">
+                <div class="formRow-label">{{ phrase('wual_events_to_post') }}</div>
+                <p class="formRow-explain">{{ phrase('wual_events_to_post_explain') }}</p>
+
+				<xf:hiddenval name="{$inputName}[events][install]" value="0" />
+				<xf:hiddenval name="{$inputName}[events][upgrade]" value="0" />
+				<xf:hiddenval name="{$inputName}[events][uninstall]" value="0" />
+				<xf:hiddenval name="{$inputName}[events][rebuild]" value="0" />
+
+
+                <xf:checkbox>
+                    <xf:option name="{$inputName}[events][install]" value="1"
+                        selected="{{ $option.option_value.events.install|default($option.default_value.events.install) }}"
+                        label="{{ phrase('install') }}" />
+                    <xf:option name="{$inputName}[events][upgrade]" value="1"
+                        selected="{{ $option.option_value.events.upgrade|default($option.default_value.events.upgrade) }}"
+                        label="{{ phrase('upgrade') }}" />
+                    <xf:option name="{$inputName}[events][uninstall]" value="1"
+                        selected="{{ $option.option_value.events.uninstall|default($option.default_value.events.uninstall) }}"
+                        label="{{ phrase('uninstall') }}" />
+                    <xf:option name="{$inputName}[events][rebuild]" value="1"
+                        selected="{{ $option.option_value.events.rebuild|default($option.default_value.events.rebuild) }}"
+                        label="{{ phrase('rebuild') }}" />
+                </xf:checkbox>
+            </div>
+
+            <div class="block block-row">
+                <div class="formRow-label">{{ phrase('wual_ignore_addons') }}</div>
+
+                <xf:textarea name="{$inputName}[threadIgnoreAddons]"
+                    label="{{ phrase('wual_thread_ignore_addons') }}"
+                    hint="{{ phrase('wual_thread_ignore_addons_hint') }}"
+                    value="{{ $option.option_value.threadIgnoreAddons|default($option.default_value.threadIgnoreAddons) }}"
+                     />
+
+                <div class="formRow-explain">
+                    {{ phrase('option_explain.wualIgnoreAddOns') }}
+                </div>
+            </div>
+        </xf:dependent>
+    </xf:option>
+</xf:radiorow>

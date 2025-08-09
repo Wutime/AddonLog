@@ -1,0 +1,18 @@
+{
+    "edit_format": "callback",
+    "edit_format_params": "Wutime\\AddonLog\\Option\\AddonThreadAction::renderOption",
+    "data_type": "array",
+    "sub_options": [
+        "action",
+        "node_id",
+        "events",
+        "threadIgnoreAddons"
+    ],
+    "validation_class": "Wutime\\AddonLog\\Option\\AddonThreadAction",
+    "validation_method": "verifyOption",
+    "advanced": false,
+    "default_value": "{\"action\":\"none\",\"node_id\":0,\"events\":{\"install\":1,\"upgrade\":1,\"uninstall\":1,\"rebuild\":0},\"threadIgnoreAddons\":\"Wutime\\/AdBlockTracker\"}",
+    "relations": {
+        "wual": 300
+    }
+}

@@ -1,0 +1,64 @@
+<xf:title>{{ phrase('wual_addon_updates') }}</xf:title>
+
+<xf:form action="{{ link('addon-updates') }}" class="block" id="wualUpdatesForm">
+    <div class="block">
+        <div class="block-container">
+            <div class="block-footer block-footer--split">
+                <xf:pagenav page="{$page}" perpage="{$perPage}" total="{$total}" link="addon-updates" params="{$linkParams}" />
+                <span class="block-footer-controls" style="display:flex;align-items:center;gap:8px;">
+                    {{ phrase('type:') }}
+                    <xf:select name="type" value="{$type}">
+                        <xf:option value="">{{ phrase('all') }}</xf:option>
+                        <xf:option value="install">{{ phrase('install') }}</xf:option>
+                        <xf:option value="upgrade">{{ phrase('upgrade') }}</xf:option>
+                        <xf:option value="uninstall">{{ phrase('uninstall') }}</xf:option>
+                        <xf:option value="rebuild">{{ phrase('rebuild') }}</xf:option>
+                    </xf:select>
+                    <xf:button type="submit" icon="search">{{ phrase('search') }}</xf:button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <xf:if is="!$logs.count()">
+        <div class="blockMessage">{{ phrase('no_results_found') }}</div>
+    <xf:else />
+        <div class="block-container">
+            <div class="block-body">
+                <xf:datalist data-xf-init="responsive-data-list">
+                    <xf:datarow rowtype="header">
+						<xf:cell>{{ phrase('icon') }}</xf:cell>
+                        <xf:cell>{{ phrase('title') }}</xf:cell>
+                        <xf:cell>{{ phrase('type') }}</xf:cell>
+                        <xf:cell>{{ phrase('wual_new_version') }}</xf:cell>
+                        <xf:cell>{{ phrase('wual_previous_version') }}</xf:cell>
+                        <xf:cell>{{ phrase('date') }}</xf:cell>
+                        <xf:cell>{{ phrase('user') }}</xf:cell>
+                    </xf:datarow>
+
+                    <xf:foreach loop="$logs" value="$log">
+                        <xf:datarow>
+							<xf:cell class="dataList-cell dataList-cell--icon">
+								<xf:if is="{$addonFa.{$log.addon_id}|default(false)}">
+									<xf:fa icon="{$addonFa.{$log.addon_id}.icon} fa-4x" type="{$addonFa.{$log.addon_id}.type}" />
+								<xf:elseif is="{$addonImgHtml.{$log.addon_id}|default(false)}" />
+									{$addonImgHtml.{$log.addon_id}|raw}
+								</xf:if>
+							</xf:cell>
+							<xf:cell>{$log.title}</xf:cell>
+                            <xf:cell>{$log.type}</xf:cell>
+                            <xf:cell>{$log.version_string}</xf:cell>
+                            <xf:cell>{$log.version_string_prior}</xf:cell>
+							<xf:cell><xf:date time="{{ $log.log_date }}" /></xf:cell>
+                            <xf:cell>
+                                <xf:avatar user="{$log.User}" size="s" notooltip="true" />
+                            </xf:cell>
+                        </xf:datarow>
+                    </xf:foreach>
+                </xf:datalist>
+            </div>
+        </div>
+    </xf:if>
+
+    <xf:pagenav page="{$page}" perpage="{$perPage}" total="{$total}" link="addon-updates" params="{$linkParams}" />
+</xf:form>

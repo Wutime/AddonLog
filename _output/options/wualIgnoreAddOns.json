@@ -1,0 +1,16 @@
+{
+    "edit_format": "onofftextbox",
+    "edit_format_params": "onoff=enabled\nvalue=addons\ntype=textarea",
+    "data_type": "array",
+    "sub_options": [
+        "enabled",
+        "addons"
+    ],
+    "validation_class": "Wutime\\AddonLog\\Option\\IgnoreAddOns",
+    "validation_method": "verifyOption",
+    "advanced": false,
+    "default_value": "{\"enabled\":\"0\",\"addons\":\"\"}",
+    "relations": {
+        "wual": 200
+    }
+}

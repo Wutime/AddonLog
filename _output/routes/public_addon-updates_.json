@@ -1,0 +1,11 @@
+{
+    "route_type": "public",
+    "route_prefix": "addon-updates",
+    "sub_name": "",
+    "format": "",
+    "build_class": "",
+    "build_method": "",
+    "controller": "Wutime\\AddonLog:Updates",
+    "context": "",
+    "action_prefix": ""
+}

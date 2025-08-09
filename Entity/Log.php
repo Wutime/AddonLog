@@ -4,6 +4,8 @@ namespace Wutime\AddonLog\Entity;
 
 use XF\Mvc\Entity\Entity;
 use XF\Mvc\Entity\Structure;
+use XF\Db\Schema\Create;
+use XF\Db\Schema\Alter;
 
 class Log extends Entity
 {

@@ -1,7 +1,17 @@
 {
+    "admin/wual_option_template_addonThreadAction.html": {
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "57137cae2789ba3b094da0ce63b7f108"
+    },
     "admin/wutime_addonlog_log_list.html": {
         "version_id": 1000000,
         "version_string": "1.0.0",
         "hash": "a9c61b4f7a2322b2ae3ffe33ffe39090"
+    },
+    "public/wual_addon_updates.html": {
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "11d0acbd5e19529f585e75f884c719df"
     }
 }

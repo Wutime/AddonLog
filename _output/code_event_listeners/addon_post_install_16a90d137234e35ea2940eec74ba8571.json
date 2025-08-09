@@ -1,9 +1,9 @@
 {
-    "event_id": "addon_post_rebuild",
+    "event_id": "addon_post_install",
     "execute_order": 10,
     "callback_class": "Wutime\\AddonLog\\Listener",
-    "callback_method": "postRebuild",
+    "callback_method": "postInstall",
     "active": true,
-    "hint": "admi",
+    "hint": "",
     "description": ""
 }

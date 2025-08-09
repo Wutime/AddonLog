@@ -5,6 +5,138 @@
         "version_string": "1.0.0",
         "hash": "cdee16ac1c44295062aa35ab6481d111"
     },
+    "option.wualIgnoreAddOns.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "9743e57937a43022a53c935fd72f82ed"
+    },
+    "option.wualLinkSiteUpdatesFooter.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "0451c34f2d4bbd0d448bf62ebdd2fd14"
+    },
+    "option.wualThreadAddonUpdate.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "02a906c339e5c8cde6727d1f664978c4"
+    },
+    "option.wualUser.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "c8226096b570762fa2bc59099b9e89d2"
+    },
+    "option_explain.wualIgnoreAddOns.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "e45a57e952ceca16a91960892068909e"
+    },
+    "option_explain.wualLinkSiteUpdatesFooter.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "26bbbd0b25012a14dc3adb4d144f9d26"
+    },
+    "option_explain.wualThreadAddonUpdate.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "option_explain.wualUser.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "1978292e8ddfdb5e445437e5d5aa7247"
+    },
+    "option_group.wual.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "85f8ed53efe1074953669bbd0055b2be"
+    },
+    "option_group_description.wual.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "b8e182b2730d63bda70eaca28d009ade"
+    },
+    "permission.general_viewAddonUpdates.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "25c6dbad485023e8cccbc1b84fcc24af"
+    },
+    "silence_is_golden.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "f0d9bd5030e6fdc05a901600074ba9bd"
+    },
+    "wual_addon_updates.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "13e780a63ef33e1758f8a285770125b6"
+    },
+    "wual_events_to_post.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "9b2faa5ca5cec7bad066d9b948518108"
+    },
+    "wual_events_to_post_explain.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "581428e8b940955b9f0562c503f39a9c"
+    },
+    "wual_ignore_addons.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "497dde20f6dcb97dbb2f0df456d7236d"
+    },
+    "wual_invalid_addon_format.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "7b3e1a686d7f31b39ca456888ca35c28"
+    },
+    "wual_new_version.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "275e590cc57b619e7c4d9a82d3278394"
+    },
+    "wual_please_select_at_least_one_event.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "8d2f16f3ea4ef6c933e3e4544105c79e"
+    },
+    "wual_please_specify_valid_forum.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "b696e559ebba41107b05d1fb60883e29"
+    },
+    "wual_post_addon_update_to_forum.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "15f0421356360e8e23ef2216bc11f836"
+    },
+    "wual_previous_version.txt": {
+        "global_cache": false,
+        "version_id": 1000270,
+        "version_string": "1.0.2",
+        "hash": "68b31426ef4b4ed633ea4c24df4cd493"
+    },
     "wutime_addonlog_logs.txt": {
         "global_cache": false,
         "version_id": 1000000,

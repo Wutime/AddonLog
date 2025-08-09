@@ -1,9 +1,9 @@
 {
-    "addon_post_install_1a33c789eb0cbbf034b6a840a65ac394.json": {
-        "hash": "4b529788dc7cd5596dc97279494923ea"
+    "addon_post_install_16a90d137234e35ea2940eec74ba8571.json": {
+        "hash": "a1ac506b90bbf892e6c8cd7364dc7958"
     },
-    "addon_post_rebuild_98aa447df344a9b23d79d09a28c0c6b8.json": {
-        "hash": "1cfc6a69924c44fcc27096c86204e6f2"
+    "addon_post_rebuild_dd4dad66eb96fa344c0137579ae5c059.json": {
+        "hash": "c906aa4689036d0e02f4b77c083989a9"
     },
     "addon_post_uninstall_06401cbc60e9f12a953a23dab46f67e2.json": {
         "hash": "ed2cd502709747ea57f71095945d9922"
