@@ -9,6 +9,8 @@ class Updates extends AbstractController
 {
     public function actionIndex(ParameterBag $params)
     {
+
+    	$opt = \XF::options();
         $page = max(1, $this->filterPage());
         $perPage = 20;
 
@@ -30,7 +32,6 @@ class Updates extends AbstractController
         $logs = $finder->limitByPage($page, $perPage)->fetch();
 
         $viewParams = [
-            'logs' => $logs,
             'page' => $page,
             'perPage' => $perPage,
             'total' => $total,
@@ -39,16 +40,19 @@ class Updates extends AbstractController
         ];
 
 
-		// --- replace your current icon block with this ---
 		$am = $this->app()->addOnManager();
 
 		$addonFa = [];          // addon_id => ['type' => 'regular|solid|brands', 'icon' => 'fa-forward']
-		$addonImgHtml = [];     // addon_id => '<img src="data:..." ...>'
+		$addonImgHtml = [];     // addon_id => '<img src="data:...">'
 		$seen = [];
 
-		$root = \XF::getRootDirectory();
+		foreach ($logs as &$log) {
 
-		foreach ($logs as $log) {
+
+			if ($opt->wualUser) {
+				$log['user_id'] = $opt->wualUser;
+			}
+
 		    $id = $log->addon_id;
 		    if (!$id || isset($seen[$id])) { continue; }
 		    $seen[$id] = true;
@@ -56,17 +60,16 @@ class Updates extends AbstractController
 		    $addOn = $am->getById($id);
 
 		    if (!$addOn) {
-		        // Add-on is completely gone → show FA question icon
+		        // completely removed: show a default FA question mark
 		        $addonFa[$id] = ['type' => 'regular', 'icon' => 'fa-question-circle'];
 		        continue;
 		    }
 
-		    $json = $addOn->getJson();
-		    $icon = $json['icon'] ?? '';
-		    if (!$icon) { continue; }                  // normalize
+		    // 1) Font Awesome icon in addon.json?
+		    if ($addOn->hasFaIcon()) {
+		        $icon = trim($addOn->icon);
 
-		    // Font Awesome?
-		    if (preg_match('~\b(fas|far|fab)\b|\bfa-(solid|regular|brands)\b|^fa-~', $icon)) {
+		        // normalize to <xf:fa> args
 		        if (preg_match('~\b(fas|far|fab)\b~', $icon, $m)) {
 		            $typeMap = ['fas' => 'solid', 'far' => 'regular', 'fab' => 'brands'];
 		            $type = $typeMap[$m[1]] ?? 'regular';
@@ -76,46 +79,28 @@ class Updates extends AbstractController
 		            $name = trim(preg_replace('~\bfa-(solid|regular|brands)\b~', '', $icon));
 		        } else {
 		            $type = 'regular';
-		            $name = $icon;
+		            $name = $icon; // e.g. "fa-forward"
 		        }
+
 		        $addonFa[$id] = ['type' => $type, 'icon' => $name];
 		        continue;
 		    }
 
-		    // Image file → embed as data URI
-		    $base = $root . '/src/addons/' . $id;
-		    $candidates = [
-		        $base . '/_data/' . $icon,          // standard
-		        $base . '/' . $icon,                // some put it at root
-		        $base . '/_data/icons/' . $icon,    // occasional subdir
-		    ];
-
-		    $path = null;
-		    foreach ($candidates as $p) {
-		        if (is_file($p) && is_readable($p)) { $path = $p; break; }
+		    // 2) Image file present? use data URI provided by XF
+		    if ($addOn->hasIcon()) {
+		        $uri = $addOn->getIconUri(); // data:image/...;base64,....
+		        if ($uri) {
+		            $addonImgHtml[$id] = '<img src="' . $uri . '" alt="" loading="lazy" width="24" height="24" style="object-fit:contain">';
+		        }
+		        continue;
 		    }
-		    if (!$path) { continue; }
 
-		    $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
-		    $mime = match ($ext) {
-		        'png'  => 'image/png',
-		        'jpg', 'jpeg' => 'image/jpeg',
-		        'gif'  => 'image/gif',
-		        'webp' => 'image/webp',
-		        'svg'  => 'image/svg+xml',
-		        default => 'application/octet-stream'
-		    };
-
-		    $data = @file_get_contents($path);
-		    if ($data === false) { continue; }
-
-		    $dataUri = 'data:' . $mime . ';base64,' . base64_encode($data);
-		    $addonImgHtml[$id] = '<img src="' . $dataUri . '" alt="" loading="lazy" width="60" height="60" style="object-fit:contain">';
+		    // 3) No icon defined → nothing (or set a different fallback if you want)
 		}
 
+		$viewParams['logs'] = $logs;
 		$viewParams['addonFa'] = $addonFa;
 		$viewParams['addonImgHtml'] = $addonImgHtml;
-
 
         return $this->view('Wutime\AddonLog:Updates', 'wual_addon_updates', $viewParams);
     }
