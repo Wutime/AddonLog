@@ -72,8 +72,13 @@ INSTALL
     public function installStep1()
     {
 
-
     	$this->setInstallUpgradeVersion();
+
+		$this->applyPermissionToGroups(
+		    [2], 
+		    'general',
+		    'viewAddonUpdates'
+		);
 
         $this->schemaManager()->createTable('xf_wu_addon_log', function (Create $table) {
             $table->addColumn('addon_log_id', 'int')->autoIncrement();
@@ -87,6 +92,11 @@ INSTALL
             $table->addPrimaryKey('addon_log_id');
             $table->addKey('log_date');
         });
+    }
+
+
+    public  function postInstall(array &$stateChanges) {
+    	\XF::app()->repository('XF:Permission')->rebuildGlobalPermissionCache();
     }
 
 
@@ -126,6 +136,18 @@ UPGRADE
 	            'install', 'upgrade', 'uninstall', 'enable', 'disable', 'rebuild'
 	        ]);
 	    });
+	}
+
+
+	public function upgrade1010000Step1() 
+	{
+		$this->applyPermissionToGroups(
+		    [2], 
+		    'general',
+		    'viewAddonUpdates'
+		);
+
+		\XF::app()->repository('XF:Permission')->rebuildGlobalPermissionCache();
 	}
 
 

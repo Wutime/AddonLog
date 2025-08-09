@@ -10,6 +10,9 @@ class Updates extends AbstractController
     public function actionIndex(ParameterBag $params)
     {
 
+
+    	$this->assertPermission('viewAddonUpdates');
+    	
     	$opt = \XF::options();
         $page = max(1, $this->filterPage());
         $perPage = 20;
