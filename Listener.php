@@ -166,7 +166,10 @@ class Listener
 	            $creator = \XF::service('XF:Thread\Creator', $forum);
 	            $creator->setIsAutomated();
 	            $creator->setContent(
-	                sprintf('[%s] %s', strtoupper($type), str_replace('[Wutime] ', '', $title)),
+					\XF::phrase('wual_log_thread_title', [
+					    'title' => $title,
+					    'type' => $type
+					]),
 	                sprintf(
 	                    "Add-on: %s\nType: %s\nVersion: %s\nPrevious: %s\nTime: %s",
 	                    $addonId,

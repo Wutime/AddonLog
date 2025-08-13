@@ -107,6 +107,12 @@
         "version_string": "1.0.2",
         "hash": "7b3e1a686d7f31b39ca456888ca35c28"
     },
+    "wual_log_thread_title.txt": {
+        "global_cache": false,
+        "version_id": 1010270,
+        "version_string": "1.1.2",
+        "hash": "c0e65f0fefebc687f8a4ef633a637630"
+    },
     "wual_new_version.txt": {
         "global_cache": false,
         "version_id": 1000270,
