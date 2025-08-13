@@ -31,12 +31,25 @@ class Listener
         array $json,
         array &$stateChanges
     ) {
+
+
+    	// Get previous version from db
+	    $db = \XF::db();
+	    
+   		// Get the previous version from the custom table
+	    $previousVersion = $db->fetchOne(
+	        'SELECT version_string FROM xf_wu_addon_log
+	         WHERE addon_id = ?
+	         ORDER BY log_date DESC LIMIT 1',
+	        $installedAddOn->addon_id
+	    ) ?: '';
+
         self::log(
             $installedAddOn->addon_id,
             $installedAddOn->title,
             'upgrade',
             $json['version_string'] ?? ($installedAddOn->version_string ?? ''),
-            $stateChanges['from_version_string'] ?? ''
+            $previousVersion
         );
     }
 
@@ -153,7 +166,7 @@ class Listener
 	            $creator = \XF::service('XF:Thread\Creator', $forum);
 	            $creator->setIsAutomated();
 	            $creator->setContent(
-	                sprintf('[%s] %s', strtoupper($type), $title),
+	                sprintf('[%s] %s', strtoupper($type), str_replace('[Wutime] ', '', $title)),
 	                sprintf(
 	                    "Add-on: %s\nType: %s\nVersion: %s\nPrevious: %s\nTime: %s",
 	                    $addonId,
