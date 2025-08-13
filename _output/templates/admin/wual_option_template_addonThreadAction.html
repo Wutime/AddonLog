@@ -48,6 +48,7 @@
                 <xf:textarea name="{$inputName}[threadIgnoreAddons]"
                     label="{{ phrase('wual_thread_ignore_addons') }}"
                     hint="{{ phrase('wual_thread_ignore_addons_hint') }}"
+					rows="5"
                     value="{{ $option.option_value.threadIgnoreAddons|default($option.default_value.threadIgnoreAddons) }}"
                      />
 
