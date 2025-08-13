@@ -1,5 +1,5 @@
 cmd.php
-addontxt.py
+*.py
 *.txt
 _data
 *.py

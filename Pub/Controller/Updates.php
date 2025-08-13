@@ -10,7 +10,6 @@ class Updates extends AbstractController
     public function actionIndex(ParameterBag $params)
     {
 
-
 	    if (!\XF::visitor()->hasPermission('general', 'viewAddonUpdates')) {
 	        return $this->noPermission();
 	    }
@@ -32,6 +31,28 @@ class Updates extends AbstractController
         if ($type) {
             $finder->where('type', $type);
         }
+
+		// Exclude listed add-ons when action === 'thread' and textarea not empty
+		$cfg = \XF::options()->wualThreadAddonUpdate;
+
+		if (
+		    is_array($cfg)
+		    && (($cfg['action'] ?? 'none') === 'thread')
+		    && !empty($cfg['listIgnoreAddons'])
+		) {
+		    $raw = (string)($cfg['threadIgnoreAddons'] ?? '');
+		    $ids = array_filter(array_map('trim', preg_split('/\R+/', $raw, -1, PREG_SPLIT_NO_EMPTY)));
+
+		    if ($ids) {
+		        // Debug for verification
+		        \XF::logError('AddonLog ignore: ' . implode(', ', $ids));
+
+		        $quoted = \XF::db()->quote($ids);
+		        $finder->whereSql(
+		            'LOWER(CONVERT(addon_id USING utf8mb4)) NOT IN (' . $quoted . ')'
+		        );
+		    }
+		}
 
         $total = $finder->total();
         $logs = $finder->limitByPage($page, $perPage)->fetch();
@@ -95,7 +116,7 @@ class Updates extends AbstractController
 		    if ($addOn->hasIcon()) {
 		        $uri = $addOn->getIconUri(); // data:image/...;base64,....
 		        if ($uri) {
-		            $addonImgHtml[$id] = '<img src="' . $uri . '" alt="" loading="lazy" width="24" height="24" style="object-fit:contain">';
+		            $addonImgHtml[$id] = '<img src="' . $uri . '" alt="" loading="lazy" width="64" height="64" style="object-fit:contain">';
 		        }
 		        continue;
 		    }

@@ -21,11 +21,14 @@ class AddonThreadAction extends AbstractOption
 
 	public static function verifyOption(array &$value, Option $option)
 	{
-	    $value   = is_array($value) ? $value : [];
-	    $action  = ($value['action'] ?? 'none') === 'thread' ? 'thread' : 'none';
-	    $nodeId  = (int)($value['node_id'] ?? 0);
+	    $value     = is_array($value) ? $value : [];
+	    $action    = ($value['action'] ?? 'none') === 'thread' ? 'thread' : 'none';
+	    $nodeId    = (int)($value['node_id'] ?? 0);
 	    $eventsIn  = (array)($value['events'] ?? []);
 	    $ignoreIn  = (string)($value['threadIgnoreAddons'] ?? '');
+
+	    // Checkbox comes through only when checked; normalize to 0/1
+	    $listEnabled = isset($value['listIgnoreAddons']) && (string)$value['listIgnoreAddons'] !== '0' ? 1 : 0;
 
 	    $existing = is_array($option->option_value) ? $option->option_value : [];
 	    $defaults = is_array($option->default_value) ? $option->default_value : [];
@@ -56,9 +59,13 @@ class AddonThreadAction extends AbstractOption
 	            return false;
 	        }
 
-	        // Clean ignore list via existing validator (use posted text or fall back to existing/default)
-	        $clean = ['enabled'=>true, 'addons'=> $ignoreIn !== '' ? $ignoreIn
-	            : (string)($existing['threadIgnoreAddons'] ?? ($defaults['threadIgnoreAddons'] ?? ''))];
+	        // Clean ignore list via existing validator
+	        $clean = [
+	            'enabled' => true,
+	            'addons'  => $ignoreIn !== ''
+	                ? $ignoreIn
+	                : (string)($existing['threadIgnoreAddons'] ?? ($defaults['threadIgnoreAddons'] ?? ''))
+	        ];
 	        if (!\Wutime\AddonLog\Option\IgnoreAddOns::verifyOption($clean, $option)) {
 	            return false;
 	        }
@@ -68,23 +75,23 @@ class AddonThreadAction extends AbstractOption
 	            'action'             => 'thread',
 	            'node_id'            => $nodeId,
 	            'events'             => $eventsNorm,
-	            'threadIgnoreAddons' => $ignoreClean
+	            'threadIgnoreAddons' => $ignoreClean,
+	            'listIgnoreAddons'   => $listEnabled
 	        ];
 	        return true;
 	    }
 
-	    // action === 'none' → DO NOT clobber previous selections
+	    // action === 'none' → preserve previous settings
 	    $value = [
 	        'action'             => 'none',
-	        // remember last chosen forum (don’t validate now)
 	        'node_id'            => $nodeId ?: (int)($existing['node_id'] ?? 0),
-	        // keep prior events or defaults
 	        'events'             => (array)($existing['events'] ?? $defaults['events'] ?? ['install'=>1,'upgrade'=>1,'uninstall'=>1,'rebuild'=>0]),
-	        // keep prior ignore list or defaults (no validation while hidden)
-	        'threadIgnoreAddons' => (string)($existing['threadIgnoreAddons'] ?? ($defaults['threadIgnoreAddons'] ?? ''))
+	        'threadIgnoreAddons' => (string)($existing['threadIgnoreAddons'] ?? ($defaults['threadIgnoreAddons'] ?? '')),
+	        'listIgnoreAddons'   => (int)($existing['listIgnoreAddons'] ?? ($defaults['listIgnoreAddons'] ?? 0))
 	    ];
 	    return true;
 	}
+
 
 
 

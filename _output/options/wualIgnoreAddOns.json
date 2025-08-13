@@ -9,7 +9,7 @@
     "validation_class": "Wutime\\AddonLog\\Option\\IgnoreAddOns",
     "validation_method": "verifyOption",
     "advanced": false,
-    "default_value": "{\"enabled\":\"0\",\"addons\":\"\"}",
+    "default_value": "{\"enabled\":\"0\",\"addons\":\"xenMade\\/LAU\"}",
     "relations": {
         "wual": 200
     }

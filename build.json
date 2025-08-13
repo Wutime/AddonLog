@@ -1,0 +1,10 @@
+{
+    "additional_files": [],
+    "exec": [
+        "rm -rf _build/upload/src/addons/{addon_id}/*.sh",
+        "rm -rf _build/upload/src/addons/{addon_id}/*.txt",
+        "rm -rf _build/upload/src/addons/{addon_id}/*.py",
+        "rm -rf _build/upload/src/addons/{addon_id}/*.log",
+        "rm -rf _build/upload/src/addons/{addon_id}/cmd.php"
+    ]
+}

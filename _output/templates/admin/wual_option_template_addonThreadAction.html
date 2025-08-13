@@ -55,6 +55,20 @@
                     {{ phrase('option_explain.wualIgnoreAddOns') }}
                 </div>
             </div>
+
+            <div class="block block-row">
+				
+				<xf:hiddenval name="{$inputName}[listIgnoreAddons]" value="0" />
+
+				<xf:checkbox>
+					<xf:option name="{$inputName}[listIgnoreAddons]"
+						value="1"
+						selected="{{ $option.option_value.listIgnoreAddons|default($option.default_value.listIgnoreAddons) }}"
+						label="{{ phrase('wual_list_ignore_addons') }}"
+						hint="{{ phrase('wual_list_ignore_addons_hint') }}" />
+				</xf:checkbox>
+			</div>
+
         </xf:dependent>
     </xf:option>
 </xf:radiorow>

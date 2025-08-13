@@ -6,12 +6,13 @@
         "action",
         "node_id",
         "events",
-        "threadIgnoreAddons"
+        "threadIgnoreAddons",
+        "listIgnoreAddons"
     ],
     "validation_class": "Wutime\\AddonLog\\Option\\AddonThreadAction",
     "validation_method": "verifyOption",
     "advanced": false,
-    "default_value": "{\"action\":\"none\",\"node_id\":0,\"events\":{\"install\":1,\"upgrade\":1,\"uninstall\":1,\"rebuild\":0},\"threadIgnoreAddons\":\"Wutime\\/AdBlockTracker\"}",
+    "default_value": "{\"action\":\"thread\",\"node_id\":2,\"events\":{\"install\":1,\"upgrade\":1,\"uninstall\":1,\"rebuild\":0},\"threadIgnoreAddons\":\"Wutime\\/AdBlockTracker\",\"listIgnoreAddons\":0}",
     "relations": {
         "wual": 300
     }

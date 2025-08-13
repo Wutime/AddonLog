@@ -9,6 +9,9 @@ class Log extends AbstractController
 {
     public function actionIndex()
     {
+
+    	$this->assertAdminPermission('viewLogs');
+    	
         $page = $this->filterPage(); // current page number from query string
         $perPage = 20; // adjust if you want more/less per page
 
