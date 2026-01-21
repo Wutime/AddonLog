@@ -161,27 +161,30 @@ class Listener
 	            $poster = \XF::visitor();
 	        }
 
-	        $create = static function () use ($forum, $addonId, $title, $type, $version, $versionPrior) {
-	            /** @var \XF\Service\Thread\Creator $creator */
-	            $creator = \XF::service('XF:Thread\Creator', $forum);
-	            $creator->setIsAutomated();
-	            $creator->setContent(
-					\XF::phrase('wual_log_thread_title', [
-					    'title' => $title,
-					    'type' => $type
-					]),
-	                sprintf(
-	                    "Add-on: %s\nType: %s\nVersion: %s\nPrevious: %s\nTime: %s",
-	                    $addonId,
-	                    $type,
-	                    $version ?: '-',
-	                    $versionPrior ?: '-',
-	                    \XF::language()->dateTime(\XF::$time)
-	                )
-	            );
-	            $creator->setPerformValidations(false);
-	            $creator->save();
-	        };
+			$create = static function () use ($forum, $addonId, $title, $type, $version, $versionPrior) {
+			    /** @var \XF\Service\Thread\Creator $creator */
+			    $creator = \XF::service('XF:Thread\Creator', $forum);
+			    $creator->setIsAutomated();
+				$rawTitle = html_entity_decode($title, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+				$creator->setContent(
+				    \XF::phrase('wual_log_thread_title', [
+				        'title' => \XF::app()->templater()->preEscaped($rawTitle),
+				        'type'  => $type
+				    ]),
+				    sprintf(
+				        "Title: %s\nAdd-on ID: %s\nType: %s\nVersion: %s\nPrevious: %s\nTime: %s",
+				        $rawTitle,
+				        $addonId,
+				        $type,
+				        $version ?: '-',
+				        $versionPrior ?: '-',
+				        \XF::language()->dateTime(\XF::$time)
+				    )
+				);
+			    $creator->setPerformValidations(false);
+			    $creator->save();
+			};
 
 	        if ($poster) {
 	            \XF::asVisitor($poster, $create);
@@ -195,10 +198,6 @@ class Listener
 	        ));
 	    }
 	}
-
-
-
-
 
 
 }

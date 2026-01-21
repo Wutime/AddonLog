@@ -44,8 +44,6 @@ class Updates extends AbstractController
 		    $ids = array_filter(array_map('trim', preg_split('/\R+/', $raw, -1, PREG_SPLIT_NO_EMPTY)));
 
 		    if ($ids) {
-		        // Debug for verification
-		        \XF::logError('AddonLog ignore: ' . implode(', ', $ids));
 
 		        $quoted = \XF::db()->quote($ids);
 		        $finder->whereSql(
